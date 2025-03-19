@@ -17,7 +17,9 @@ CREATE TABLE IF NOT EXISTS decks (
 
 CREATE TABLE IF NOT EXISTS games (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  winner_id INT NOT NULL,
+  played_at DATETIME NOT NULL,
+  added_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  location VARCHAR(255) NOT NULL,
   FOREIGN KEY (winner_id) REFERENCES players(id)
 );
 
@@ -25,6 +27,7 @@ CREATE TABLE IF NOT EXISTS players_games (
   player_id INT NOT NULL,
   game_id INT NOT NULL,
   deck_id INT NOT NULL,
+  position INT NOT NULL,
   FOREIGN KEY (player_id) REFERENCES players(id),
   FOREIGN KEY (game_id) REFERENCES games(id),
   FOREIGN KEY (deck_id) REFERENCES decks(id)
