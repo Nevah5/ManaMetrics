@@ -7,30 +7,44 @@
     <v-navigation-drawer expand-on-hover rail>
       <v-list>
         <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-          subtitle="sandra_a88@gmailcom"
-          title="Sandra Adams"
+          prepend-avatar="https://xsgames.co/randomusers/assets/avatars/male/3.jpg"
+          subtitle="@username"
+          title="User Name"
         ></v-list-item>
       </v-list>
 
       <v-divider></v-divider>
 
       <v-list density="compact" nav>
-        <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
         <v-list-item
-          prepend-icon="mdi-account-multiple"
-          title="Shared with me"
-          value="shared"
+        prepend-icon="mdi-account-group"
+        title="Players"
+        value="players"
         ></v-list-item>
-        <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
+        <v-list-item
+        prepend-icon="mdi-controller"
+        title="Games"
+        value="games"
+        ></v-list-item>
+        <v-list-item prepend-icon="mdi-cards" title="Decks" value="decks"></v-list-item>
+        <v-list-item prepend-icon="mdi-star" title="Favorites" value="starred"></v-list-item>
       </v-list>
-      <v-divider></v-divider>
-      <v-list density="compact">
-        <v-list-item prepend-icon="mdi-star" title="Toggle Theme"></v-list-item>
+
+      <v-list density="compact" class="fixed-bottom">
+        <v-list-item
+          :prepend-icon="
+            theme === 'light' ? 'mdi-white-balance-sunny' : 'mdi-moon-waning-crescent'
+          "
+          title="Toggle Theme"
+          @click="toggleTheme"
+        ></v-list-item>
+
+        <v-list-item prepend-icon="mdi-logout" title="Logout" @click="logout"></v-list-item>
       </v-list>
     </v-navigation-drawer>
-
-    <RouterView />
+    <v-main>
+      <RouterView />
+    </v-main>
   </v-app>
 </template>
 
@@ -45,3 +59,11 @@ function toggleTheme() {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
 </script>
+
+<style lang="scss">
+.fixed-bottom {
+  position: fixed !important;
+  bottom: 0 !important;
+  width: 100%;
+}
+</style>
