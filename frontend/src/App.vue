@@ -3,8 +3,9 @@
     <v-app-bar app>
       <v-toolbar-title>MTG Stats</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
     </v-app-bar>
-    <v-navigation-drawer expand-on-hover rail>
+    <v-navigation-drawer v-model="drawer" location="right" temporary>
       <v-list>
         <v-list-item
           prepend-avatar="https://xsgames.co/randomusers/assets/avatars/male/3.jpg"
@@ -39,7 +40,7 @@
           @click="toggleTheme"
         ></v-list-item>
 
-        <v-list-item prepend-icon="mdi-logout" title="Logout" @click="logout"></v-list-item>
+        <v-list-item prepend-icon="mdi-logout" class="text-red-darken-2" title="Logout" @click="logout"></v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-main>
@@ -51,19 +52,15 @@
 <script setup>
 import { shallowRef } from 'vue'
 import { RouterView } from 'vue-router'
-const order = shallowRef(0)
 
+const drawer = shallowRef(false)
 const theme = shallowRef('light')
 
 function toggleTheme() {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
-</script>
 
-<style lang="scss">
-.fixed-bottom {
-  position: fixed !important;
-  bottom: 0 !important;
-  width: 100%;
+function logout() {
+  console.log('logout')
 }
-</style>
+</script>

@@ -1,1 +1,7 @@
 @import './base.css';
+
+.fixed-bottom {
+  position: fixed !important;
+  bottom: 0 !important;
+  width: 100%;
+}
