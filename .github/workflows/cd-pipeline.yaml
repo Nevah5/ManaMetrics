@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+      - feature/cicd
 
 name: CD Pipeline
 
@@ -28,7 +28,7 @@ jobs:
       - name: Login to Portainer
         run: |
           echo "Logging in to Portainer..."
-          RESPONSE=$(curl -s -X POST https://portainer.geeler.net/api/auth \
+          RESPONSE=$(curl -v -X POST https://portainer.geeler.net/api/auth \
             -H "Content-Type: application/json" \
             -d '{"username": "${{ secrets.PORTAINER_USER }}", "password": "${{ secrets.PORTAINER_PASSWORD }}"}')
           JWT=$(echo $RESPONSE | jq -r '.jwt')
