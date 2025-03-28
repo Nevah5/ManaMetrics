@@ -1,85 +1,66 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <v-app :theme="theme">
+    <v-app-bar app>
+      <v-toolbar-title>MTG Stats</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer" location="right" temporary>
+      <v-list>
+        <v-list-item
+          prepend-avatar="https://xsgames.co/randomusers/assets/avatars/male/3.jpg"
+          subtitle="@username"
+          title="User Name"
+        ></v-list-item>
+      </v-list>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <v-divider></v-divider>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+      <v-list density="compact" nav>
+        <v-list-item
+        prepend-icon="mdi-account-group"
+        title="Players"
+        value="players"
+        ></v-list-item>
+        <v-list-item
+        prepend-icon="mdi-controller"
+        title="Games"
+        value="games"
+        ></v-list-item>
+        <v-list-item prepend-icon="mdi-cards" title="Decks" value="decks"></v-list-item>
+        <v-list-item prepend-icon="mdi-star" title="Favorites" value="starred"></v-list-item>
+      </v-list>
 
-  <RouterView />
+      <v-list density="compact" class="fixed-bottom">
+        <v-list-item
+          :prepend-icon="
+            theme === 'light' ? 'mdi-white-balance-sunny' : 'mdi-moon-waning-crescent'
+          "
+          title="Toggle Theme"
+          @click="toggleTheme"
+        ></v-list-item>
+
+        <v-list-item prepend-icon="mdi-logout" class="text-red-darken-2" title="Logout" @click="logout"></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+    <v-main>
+      <RouterView />
+    </v-main>
+  </v-app>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<script setup>
+import { shallowRef } from 'vue'
+import { RouterView } from 'vue-router'
+
+const drawer = shallowRef(false)
+const theme = shallowRef('light')
+
+function toggleTheme() {
+  theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+function logout() {
+  console.log('logout')
 }
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+</script>

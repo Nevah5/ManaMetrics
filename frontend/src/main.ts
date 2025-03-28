@@ -1,11 +1,27 @@
 import './assets/main.css'
+import '@mdi/font/css/materialdesignicons.css'
 
 import { createApp } from 'vue'
-import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-app.use(router)
+// Components
+import App from './App.vue'
 
-app.mount('#app')
+const vuetify = createVuetify({
+  components,
+  icons: {
+    defaultSet: 'mdi',
+  },
+  directives,
+})
+
+createApp(App)
+.use(vuetify)
+.use(router)
+.mount('#app')
