@@ -25,8 +25,12 @@ jobs:
           echo "Connecting VPN Tunnel..."
           sudo wg-quick up ./wg0.conf
           echo "Configured Wireguard VPN!"
-      - name: Test DNS Resolution
+      - name: Login to Portainer
         run: |
-          echo "Testing DNS resolution..."
-          nslookup portainer.geeler.net
-          echo "DNS resolution test completed!"
+          echo "Logging in to Portainer..."
+          RESPONSE=$(curl -s -X POST http://portainer.geeler.net/api/auth \
+            -H "Content-Type: application/json" \
+            -d '{"username": "${{ secrets.PORTAINER_USER }}", "password": "${{ secrets.PORTAINER_PASSWORD }}"}')
+          JWT=$(echo $RESPONSE | jq -r '.jwt')
+          echo "JWT=$JWT" >> $GITHUB_ENV
+          echo "Logged in successfully."
