@@ -4,7 +4,7 @@ interface NavbarItem {
   children?: NavbarItem[];
 }
 
-const navbarItems: NavbarItem[] = [
+const items: NavbarItem[] = [
   {
     "display": "Home",
     "path": "/",
@@ -32,4 +32,22 @@ const navbarItems: NavbarItem[] = [
   }
 ]
 
-export default navbarItems
+const personal: NavbarItem[] = [
+  {
+    "display": "Your Games",
+    "path": "/user/@me/games",
+  },
+  {
+    "display": "Groups",
+    "path": "/user/@me/groups",
+  }
+]
+
+export {
+  items,
+  personal
+}
+
+export type {
+  NavbarItem
+}
