@@ -1,0 +1,77 @@
+on:
+  push:
+
+name: CI/CD Pipeline
+
+jobs:
+  build:
+    name: Build
+    permissions:
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Docker Build
+        run: |
+          echo "Building Docker image..."
+          cd frontend
+          docker build -t mtg-stats-frontend:latest .
+          echo "Docker image built!"
+      - name: Login to ghcr.io
+        if: github.ref_name == 'develop' || github.ref_name == 'main'
+        run: |
+          echo "Logging in to ghcr.io..."
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          echo "Logged in successfully."
+      - name: Push Docker image to ghcr.io (develop)
+        if: github.ref_name == 'develop'
+        run: |
+          echo "Pushing Docker image to ghcr.io..."
+          docker tag mtg-stats-frontend:latest ghcr.io/nevah5/mtg-stats-frontend:develop
+          docker push ghcr.io/nevah5/mtg-stats-frontend:develop
+          echo "Docker image pushed!"
+      - name: Push Docker image to ghcr.io (main)
+        if: github.ref_name == 'main'
+        run: |
+          echo "Pushing Docker image to ghcr.io..."
+          docker tag mtg-stats-frontend:latest ghcr.io/nevah5/mtg-stats-frontend:latest
+          docker push ghcr.io/nevah5/mtg-stats-frontend:latest
+          echo "Docker image pushed!"
+  deploy:
+    name: Deploy
+    if: github.ref_name == 'main'
+    needs: build
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Wireguard VPN
+        run: |
+          echo "Setting up Wireguard VPN..."
+          sudo apt update
+          sudo apt install -y wireguard
+          echo "Installed Wireguard VPN!"
+      - name: Configure Wireguard VPN
+        run: |
+          echo "Configuring Wireguard VPN..."
+          echo -n "${{ secrets.WIREGUARD_VPN_CONFIG }}" | base64 --decode > wg0.conf
+          echo "Connecting VPN Tunnel..."
+          sudo wg-quick up ./wg0.conf
+          echo "Configured Wireguard VPN!"
+      - name: Login to Portainer
+        run: |
+          echo "Logging in to Portainer..."
+          RESPONSE=$(curl -s -k -X POST https://portainer.geeler.net/api/auth \
+            -H "Content-Type: application/json" \
+            -d '{"username": "${{ secrets.PORTAINER_USER }}", "password": "${{ secrets.PORTAINER_PASSWORD }}"}')
+          JWT=$(echo $RESPONSE | jq -r '.jwt')
+          echo "JWT=$JWT" >> $GITHUB_ENV
+          echo "Logged in successfully."
+      - name: Redeploy Stack
+        if: false
+        run: |
+          echo "Redeploying mtg-stats stack..."
+          # maybe this endpoint, please check still
+          curl -v -k -X POST https://portainer.geeler.net/api/stacks/{id}/git/redeploy \
+            -H "Authorization: Bearer ${{ env.JWT }}"
+          echo "Redeployed successfully."
