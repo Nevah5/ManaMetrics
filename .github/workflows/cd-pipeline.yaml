@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-      - feature/cicd
+  workflow_dispatch:
 
 name: CD Pipeline
 
