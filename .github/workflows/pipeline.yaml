@@ -47,7 +47,7 @@ jobs:
         run: |
           echo "Setting up Wireguard VPN..."
           sudo apt update
-          sudo apt install wireguard
+          sudo apt install -y wireguard
           echo "Installed Wireguard VPN!"
       - name: Configure Wireguard VPN
         run: |
