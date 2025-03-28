@@ -38,6 +38,8 @@ jobs:
           echo "Docker image pushed!"
   deploy:
     name: Deploy
+    permissions:
+      contents: write
     if: github.ref_name == 'main'
     needs: build
     environment: production
