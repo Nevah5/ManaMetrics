@@ -4,10 +4,12 @@
     <v-main>
       <RouterView />
     </v-main>
+    <AppFooter />
   </v-app>
 </template>
 
 <script setup>
+import AppFooter from './components/AppFooter.vue'
 import TopBar from '@/components/TopBar.vue'
 import { shallowRef } from 'vue'
 import { RouterView } from 'vue-router'
