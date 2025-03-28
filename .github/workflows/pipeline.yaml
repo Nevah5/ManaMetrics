@@ -1,14 +1,11 @@
 on:
   push:
-    branches:
-      - feature/cicd
 
 name: CI/CD Pipeline
 
 jobs:
   build:
     name: Build
-    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -41,8 +38,8 @@ jobs:
           echo "Docker image pushed!"
   deploy:
     name: Deploy
-    if: github.ref_name == 'main' || github.ref_name == 'feature/cicd'
-    # needs: build
+    if: github.ref_name == 'main'
+    needs: build
     environment: production
     runs-on: ubuntu-latest
     steps:
@@ -62,9 +59,17 @@ jobs:
       - name: Login to Portainer
         run: |
           echo "Logging in to Portainer..."
-          RESPONSE=$(curl -v -X POST https://portainer.geeler.net/api/auth \
+          RESPONSE=$(curl -s -k -X POST https://portainer.geeler.net/api/auth \
             -H "Content-Type: application/json" \
             -d '{"username": "${{ secrets.PORTAINER_USER }}", "password": "${{ secrets.PORTAINER_PASSWORD }}"}')
           JWT=$(echo $RESPONSE | jq -r '.jwt')
           echo "JWT=$JWT" >> $GITHUB_ENV
           echo "Logged in successfully."
+      - name: Redeploy Stack
+        if: false
+        run: |
+          echo "Redeploying mtg-stats stack..."
+          # maybe this endpoint, please check still
+          curl -v -k -X POST https://portainer.geeler.net/api/stacks/{id}/git/redeploy \
+            -H "Authorization: Bearer ${{ env.JWT }}"
+          echo "Redeployed successfully."
