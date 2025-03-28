@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - main
+      - feature/cicd
+
+name: CD Pipeline
+
+jobs:
+  deploy:
+    name: Deploy
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Wireguard VPN
+        run: |
+          echo "Setting up Wireguard VPN..."
+          sudo apt update
+          sudo apt install wireguard
+          echo "Installed Wireguard VPN!"
+      - name: Configure Wireguard VPN
+        run: |
+          echo "Configuring Wireguard VPN..."
+          echo ${{ secrets.WIREGUARD_VPN_CONFIG }} > /etc/wireguard/wg0.conf
+          echo "Connecting VPN Tunnel..."
+          sudo wg-quick up wg0
+          echo "Configured Wireguard VPN!"
+      - name: Test DNS Resolution
+        run: |
+          echo "Testing DNS resolution..."
+          nslookup portainer.geeler.net
+          echo "DNS resolution test completed!"
