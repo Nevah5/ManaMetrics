@@ -16,7 +16,6 @@
       <router-link class="reset-style" to="/login">Login</router-link>
       <router-link class="reset-style" to="/register">Register</router-link>
       <v-text-field
-        v-model="search"
         density="compact"
         label="Search"
         prepend-inner-icon="mdi-magnify"
@@ -42,7 +41,7 @@
         location="end"
       >
         <template v-slot:activator="{ props }">
-          <v-btn v-bind="props" icon="mdi-menu" variant="text" density="comfortable" />
+          <v-btn v-bind="props" icon="mdi-account-circle-outline" variant="text" density="comfortable" />
         </template>
         <NavMenu @close="isMenuOpen = false" />
       </v-menu>

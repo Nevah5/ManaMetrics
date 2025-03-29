@@ -5,12 +5,14 @@
       <RouterView />
     </v-main>
     <AppFooter />
+    <SpeedDial />
   </v-app>
 </template>
 
 <script setup>
-import AppFooter from './components/AppFooter.vue'
+import AppFooter from '@/components/AppFooter.vue'
 import TopBar from '@/components/TopBar.vue'
+import SpeedDial from '@/components/navbar/SpeedDial.vue';
 import { ref, provide, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
 
