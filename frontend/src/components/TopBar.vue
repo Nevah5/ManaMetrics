@@ -29,7 +29,7 @@
       <v-btn
         :icon="theme === 'dark' ? 'mdi-white-balance-sunny' : 'mdi-weather-night'"
         :color="theme === 'dark' ? 'white' : 'black'"
-        @click="$emit('toggleTheme')"
+        @click="toggleTheme"
         density="comfortable"
       ></v-btn>
     </div>
@@ -44,22 +44,21 @@
         <template v-slot:activator="{ props }">
           <v-btn v-bind="props" icon="mdi-menu" variant="text" density="comfortable" />
         </template>
-        <NavMenu @close="isMenuOpen = false" @toggleTheme="$emit('toggleTheme')" :theme="theme" />
+        <NavMenu @close="isMenuOpen = false" />
       </v-menu>
     </div>
   </v-app-bar>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import NavButton from './navbar/NavButton.vue';
 import NavMenu from './navbar/NavMenu.vue';
 import { items, personal } from '@/configs/navbar';
-import { defineProps, onMounted, shallowRef, ref } from 'vue'
+import { onMounted, shallowRef, ref, inject } from 'vue'
+
+const { current: theme, toggle: toggleTheme } = inject('theme') as { current: string, toggle: () => void };
 
 const isLoggedIn = shallowRef(false);
-const props = defineProps({
-  theme: { type: String, required: true },
-})
 
 const isMenuOpen = ref(false)
 

@@ -7,26 +7,24 @@
       <v-divider></v-divider>
 
       <v-list-item
-        @click="$emit('toggleTheme')"
-        :prepend-icon="props.theme === 'dark' ? 'mdi-white-balance-sunny' : 'mdi-weather-night'"
+        @click="toggleTheme"
+        :prepend-icon="theme === 'dark' ? 'mdi-white-balance-sunny' : 'mdi-weather-night'"
       >
-        {{ props.theme === 'dark' ? 'Disable' : "Enable" }} dark mode
+        {{ theme === 'dark' ? 'Disable' : "Enable" }} dark mode
       </v-list-item>
     </v-list>
   </v-card>
 </template>
 
 <script lang="ts" setup>
-import { defineProps } from 'vue';
+import { defineProps, inject } from 'vue';
+
+const { current: theme, toggle: toggleTheme } = inject('theme') as { current: string, toggle: () => void };
 
 const props = defineProps({
   menu: {
     type: Boolean,
     default: false,
-  },
-  theme: {
-    type: String,
-    required: true,
   },
 });
 </script>
