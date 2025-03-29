@@ -70,9 +70,9 @@ jobs:
       - name: Redeploy Stack
         run: |
           echo "Redeploying mtg-stats stack..."
-          # maybe this endpoint, please check still
           curl -s -k -X PUT https://portainer.geeler.net/api/stacks/100/git/redeploy?endpointId=3 \
             -H "Authorization: Bearer ${{ env.JWT }}" \
+            -H "Content-Type: application/json" \
             -d '{"prune": true, "pull_image": true}'
           echo "Redeployed successfully."
       - name: Smoke Test
