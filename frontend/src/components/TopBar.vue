@@ -37,79 +37,22 @@
     <div class="d-flex d-md-none align-center gap-0 mr-2">
       <v-btn icon="mdi-magnify" variant="text" density="comfortable" />
       <v-menu
-        v-model="menu"
+        v-model="isMenuOpen"
         :close-on-content-click="false"
         location="end"
       >
-      <template v-slot:activator="{ props }">
-        <v-btn v-bind="props" icon="mdi-menu" variant="text" density="comfortable" />
-      </template>
-
-        <v-card min-width="300">
-          <v-list>
-            <v-list-item
-              prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
-              subtitle="Founder of Vuetify"
-              title="John Leider"
-            >
-              <template v-slot:append>
-                <v-btn
-                  :class="fav ? 'text-red' : ''"
-                  icon="mdi-heart"
-                  variant="text"
-                  @click="fav = !fav"
-                ></v-btn>
-              </template>
-            </v-list-item>
-          </v-list>
-
-          <v-divider></v-divider>
-
-          <v-list>
-            <v-list-item>
-              <v-switch
-                v-model="message"
-                color="purple"
-                label="Enable messages"
-                hide-details
-              ></v-switch>
-            </v-list-item>
-
-            <v-list-item>
-              <v-switch
-                v-model="hints"
-                color="purple"
-                label="Enable hints"
-                hide-details
-              ></v-switch>
-            </v-list-item>
-          </v-list>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-
-            <v-btn
-              variant="text"
-              @click="menu = false"
-            >
-              Cancel
-            </v-btn>
-            <v-btn
-              color="primary"
-              variant="text"
-              @click="menu = false"
-            >
-              Save
-            </v-btn>
-          </v-card-actions>
-        </v-card>
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props" icon="mdi-menu" variant="text" density="comfortable" />
+        </template>
+        <NavMenu @close="isMenuOpen = false" @toggleTheme="$emit('toggleTheme')" :theme="theme" />
       </v-menu>
     </div>
   </v-app-bar>
 </template>
 
 <script setup>
-import NavButton from './buttons/NavButton.vue';
+import NavButton from './navbar/NavButton.vue';
+import NavMenu from './navbar/NavMenu.vue';
 import { items, personal } from '@/configs/navbar';
 import { defineProps, onMounted, shallowRef, ref } from 'vue'
 
@@ -118,10 +61,7 @@ const props = defineProps({
   theme: { type: String, required: true },
 })
 
-const fav = ref(true)
-const menu = ref(false)
-const message = ref(false)
-const hints = ref(true)
+const isMenuOpen = ref(false)
 
 onMounted(() => {
   const isLogin = localStorage.getItem('is_login');
