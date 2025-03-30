@@ -11,20 +11,7 @@ const items: NavbarItem[] = [
   },
   {
     "display": "Explore",
-    "children": [
-      {
-        "display": "Users",
-        "path": "/users",
-      },
-      {
-        "display": "Leaderboard",
-        "path": "/users/leaderboard",
-      },
-      {
-        "display": "Most played",
-        "path": "/explore/most-played",
-      }
-    ]
+    "path": "/explore"
   },
   {
     "display": "Decks",
@@ -34,13 +21,13 @@ const items: NavbarItem[] = [
 
 const personal: NavbarItem[] = [
   {
-    "display": "Your Games",
-    "path": "/user/@me/games",
-  },
-  {
     "display": "Groups",
     "path": "/user/@me/groups",
-  }
+  },
+  {
+    "display": "Stats",
+    "path": "/user/@me/stats",
+  },
 ]
 
 export {
