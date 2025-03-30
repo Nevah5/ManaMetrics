@@ -1,6 +1,6 @@
 
 <template>
-  <div class="speed-dial">
+  <div class="speed-dial d-md-none">
     <v-speed-dial
       v-model="isOpen"
       attach="body"

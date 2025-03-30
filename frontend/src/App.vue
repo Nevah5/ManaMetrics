@@ -1,7 +1,7 @@
 <template>
   <v-app :theme="theme">
     <TopBar :theme="theme" @toggle-theme="toggleTheme" />
-    <v-main>
+    <v-main class="ma-4">
       <RouterView />
     </v-main>
     <AppFooter />

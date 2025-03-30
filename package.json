@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@mdi/font": "^7.4.47"
-  },
-  "devDependencies": {
-    "sass-embedded": "^1.86.0"
-  }
-}
