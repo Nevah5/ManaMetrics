@@ -16,9 +16,9 @@
         ></v-fab>
       </template>
 
-        <v-btn v-for="item, i in personalReversed" :key="i" :icon="item.icon" :to="item.path"
+        <v-btn v-for="item, i in personalReversed" :key="i" :icon="item.icon" @click="$router.push(item.path || '')"
             :color="theme === 'dark' ? 'indigo-lighten-5' : 'indigo-lighten-1'" />
-        <v-btn v-for="item, i in itemsReversed" :key="i" :icon="item.icon" :to="item.path"
+        <v-btn v-for="item, i in itemsReversed" :key="i + personalReversed.length" :icon="item.icon" @click="$router.push(item.path || '')"
             :color="theme === 'dark' ? 'indigo-lighten-5' : 'indigo-lighten-1'" />
     </v-speed-dial>
   </div>
