@@ -8,6 +8,8 @@ services:
     restart: always
   backend:
     image: ghcr.io/nevah5/mtg-stats-backend:latest
+    env:
+      GLOBAL_BASEPATH: "/api"
     ports:
       - "8008:3000"
     restart: always
