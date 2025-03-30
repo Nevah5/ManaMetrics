@@ -2,5 +2,5 @@
 </script>
 
 <template>
-  <h1>Dashboard</h1>
+  <h1>MTG Stats</h1>
 </template>
