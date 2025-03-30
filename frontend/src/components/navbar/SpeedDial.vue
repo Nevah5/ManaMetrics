@@ -1,70 +1,27 @@
 
 <template>
-  <div class="text-center speed-dial">
-    <v-menu
-      :close-on-content-click="true"
-      location="top"
-    >
-      <template v-slot:activator="{ props }">
-        <v-btn
-          density="compact"
-          icon="mdi-home"
-          size="x-large"
-          v-bind="props" />
+  <div class="d-flex speed-dial">
+    <v-speed-dial attach="body" :contained="true" location="top center" transition="fade-transition" class="speed-dial">
+      <template v-slot:activator="{ props: activatorProps }">
+        <v-fab
+          v-bind="activatorProps"
+          size="large"
+          icon="mdi-menu"
+        ></v-fab>
       </template>
 
-      <v-list class="speed-dial-content mb-4">
-        <template v-for="item, i in items" :key="i">
-          <v-list-item
-            v-if="!item.children"
-            :title="item.display"
-            :to="item.path"
-          ></v-list-item>
-          <v-list-group v-else :value="item.display">
-            <template v-slot:activator="{ props }">
-              <v-list-item
-                v-bind="props"
-                :title="item.display"
-              ></v-list-item>
-            </template>
-
-            <v-list-item
-              v-for="child, ci in item.children" :key="ci"
-              :title="child.display"
-              :to="child.path"
-            ></v-list-item>
-          </v-list-group>
-        </template>
-        <v-divider class="mx-3" vertical v-if="isLoggedIn"></v-divider>
-        <template v-for="item, i in personal" :key="i" v-if="isLoggedIn">
-          <v-list-item
-            v-if="!item.children"
-            :title="item.display"
-            :to="item.path"
-          ></v-list-item>
-          <v-list-group v-else :value="item.display">
-            <template v-slot:activator="{ props }">
-              <v-list-item
-                v-bind="props"
-                :title="item.display"
-              ></v-list-item>
-            </template>
-
-            <v-list-item
-              v-for="child, ci in item.children" :key="ci"
-              :title="child.display"
-              :to="child.path"
-            ></v-list-item>
-          </v-list-group>
-        </template>
-      </v-list>
-    </v-menu>
+      <v-btn v-for="item, i in personalReversed" :key="i" :icon="item.icon" :to="item.path" />
+      <v-btn v-for="item, i in itemsReversed" :key="i" :icon="item.icon" :to="item.path" />
+    </v-speed-dial>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { items, personal } from '@/configs/navbar';
 import { shallowRef, onMounted } from 'vue';
+
+const itemsReversed = items.reverse();
+const personalReversed = personal.reverse();
 
 const isLoggedIn = shallowRef(true);
 
@@ -84,10 +41,5 @@ onMounted(() => {
   bottom: 20px;
   right: 20px;
   z-index: 1000;
-}
-
-.speed-dial-content {
-  width: 40vw;
-  min-width: 400px;
 }
 </style>
