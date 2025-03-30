@@ -1,7 +1,9 @@
 <template>
   <v-app-bar app>
     <div class="d-flex align-center ga-10 ml-5">
-      <v-toolbar-title>MTG Stats</v-toolbar-title>
+      <v-toolbar-title>
+        <LogoComponent />
+      </v-toolbar-title>
 
       <div class="align-center ga-3 d-none d-md-flex">
         <nav-button :items="items" />
@@ -50,6 +52,7 @@
 </template>
 
 <script lang="ts" setup>
+import LogoComponent from './LogoComponent.vue';
 import NavButton from './navbar/NavButton.vue';
 import NavMenu from './navbar/NavMenu.vue';
 import { items, personal } from '@/configs/navbar';
