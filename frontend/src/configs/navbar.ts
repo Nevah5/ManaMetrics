@@ -1,46 +1,39 @@
 interface NavbarItem {
   display: string;
   path?: string;
+  icon: string;
   children?: NavbarItem[];
 }
 
 const items: NavbarItem[] = [
   {
-    "display": "Home",
-    "path": "/",
+    display: "Home",
+    path: "/",
+    icon: "mdi-home-outline",
   },
   {
-    "display": "Explore",
-    "children": [
-      {
-        "display": "Users",
-        "path": "/users",
-      },
-      {
-        "display": "Leaderboard",
-        "path": "/users/leaderboard",
-      },
-      {
-        "display": "Most played",
-        "path": "/explore/most-played",
-      }
-    ]
+    display: "Explore",
+    path: "/explore",
+    icon: "mdi-compass-outline",
   },
   {
-    "display": "Decks",
-    "path": "/decks",
+    display: "Decks",
+    path: "/decks",
+    icon: "mdi-cards-outline",
   }
 ]
 
 const personal: NavbarItem[] = [
   {
-    "display": "Your Games",
-    "path": "/user/@me/games",
+    display: "Groups",
+    path: "/user/@me/groups",
+    icon: "mdi-account-group-outline",
   },
   {
-    "display": "Groups",
-    "path": "/user/@me/groups",
-  }
+    display: "Stats",
+    path: "/user/@me/stats",
+    icon: "mdi-chart-box-outline",
+  },
 ]
 
 export {

@@ -68,10 +68,21 @@ jobs:
           echo "JWT=$JWT" >> $GITHUB_ENV
           echo "Logged in successfully."
       - name: Redeploy Stack
-        if: false
         run: |
           echo "Redeploying mtg-stats stack..."
-          # maybe this endpoint, please check still
-          curl -v -k -X POST https://portainer.geeler.net/api/stacks/{id}/git/redeploy \
-            -H "Authorization: Bearer ${{ env.JWT }}"
+          curl -s -k -X PUT https://portainer.geeler.net/api/stacks/100/git/redeploy?endpointId=3 \
+            -H "Authorization: Bearer ${{ env.JWT }}" \
+            -H "Content-Type: application/json" \
+            -d '{"env":[],"prune":false,"RepositoryReferenceName":"","RepositoryAuthentication":false,"RepositoryUsername":"","RepositoryPassword":"","PullImage":true}'
           echo "Redeployed successfully."
+      - name: Smoke Test
+        run: |
+          echo "Running smoke tests..."
+          sleep 10 # adjust as necessary for the service to start
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://nexium.geeler.net:8007)
+          if [ "$RESPONSE" -ne 200 ]; then
+            echo "Smoke test failed! Response code: $RESPONSE"
+            exit 1
+          else
+            echo "Smoke test passed! Response code: $RESPONSE"
+          fi
