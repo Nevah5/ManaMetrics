@@ -1,10 +1,10 @@
 <template>
-  <div class="d-flex flex-column mb-4">
-    <h2 class="mb-2">
+  <div class="d-flex flex-column mb-8">
+    <h2 class="mb-2 text-center">
       ✨ Featured Statistics ✨
       <v-chip size="small" color="green" append-icon="mdi-creation-outline">new</v-chip>
     </h2>
-    <div class="d-flex flex-wrap ga-4">
+    <div class="d-flex flex-wrap ga-4 justify-center">
       <v-card class="pb-4">
         <v-card-title>
           Total Players
