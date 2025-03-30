@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import FeaturedStats from '@/components/dashboard/FeaturedStats.vue';
+
 </script>
 
 <template>
-  <h1>MTG Stats</h1>
+  <h1>Dashboard</h1>
+  <FeaturedStats />
 </template>
