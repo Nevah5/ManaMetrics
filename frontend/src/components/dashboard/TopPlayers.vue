@@ -4,6 +4,7 @@
       Top Players
       <v-chip size="small" color="green" append-icon="mdi-creation-outline">new</v-chip>
     </h2>
+    <p class="text-center mb-3">The players listed below are only from all of your groups</p>
     <div class="ga-4 leaderboard">
       <v-card class="pb-4" color="blue-grey-lighten-1" href="/player/player2">
         <v-card-title class="d-flex flex-column align-center pa-8">
@@ -36,7 +37,6 @@
         <v-card-subtitle class="text-h4">43 <span class="text-h6">decks</span></v-card-subtitle>
       </v-card>
     </div>
-    <p class="text-center mt-3">The players listed above and below are only from all of your groups</p>
     <v-data-table
       class="mt-4"
       :headers="headers"
