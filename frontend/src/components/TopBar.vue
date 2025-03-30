@@ -38,7 +38,7 @@
       <v-menu
         v-model="isMenuOpen"
         :close-on-content-click="false"
-        location="end"
+        location="bottom"
       >
         <template v-slot:activator="{ props }">
           <v-btn v-bind="props" icon="mdi-account-circle-outline" variant="text" density="comfortable" />
