@@ -30,19 +30,14 @@ import { shallowRef, onMounted, inject } from 'vue';
 
 const { current: theme } = inject('theme') as { current: string };
 
-const itemsReversed = items.reverse();
-const personalReversed = personal.reverse();
+const itemsReversed = [...items].reverse();
+const personalReversed = [...personal].reverse();
 
 const isOpen = shallowRef(false);
 const isLoggedIn = shallowRef(true);
 
 onMounted(() => {
-  const isLogin = localStorage.getItem('is_login');
-  if (isLogin) {
-    isLoggedIn.value = true;
-  } else {
-    isLoggedIn.value = false;
-  }
+  isLoggedIn.value = !!localStorage.getItem('is_login');
 });
 </script>
 
