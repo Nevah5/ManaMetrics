@@ -1,9 +1,0 @@
-spring:
-  application:
-    name: mm-backend
-server:
-  port: 3000
-  servlet:
-    context-path: /api
-
-
