@@ -1,0 +1,6 @@
+target/
+*.jar
+*.war
+*.zip
+*.tar.gz
+*.log
