@@ -1,5 +1,6 @@
-node_modules
-dist
+target/
+*.jar
+*.war
+*.zip
+*.tar.gz
 *.log
-*.md
-.git
