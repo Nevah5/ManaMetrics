@@ -2,7 +2,7 @@
   <router-link to="/" class="d-flex align-center reset-style">
     <img src="/logo_dark.webp" alt="Logo" class="logo" v-if="theme === 'light'" />
     <img src="/logo_light.webp" alt="Logo" class="logo" v-else />
-    <span class="ml-2"><b>MTG Stats</b></span>
+    <span class="ml-2"><b>ManaMetrics</b></span>
   </router-link>
 </template>
 
