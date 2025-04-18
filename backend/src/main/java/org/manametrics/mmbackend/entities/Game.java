@@ -17,9 +17,9 @@ public class Game {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime playedAt;
 
-    @Column(name = "added_at", nullable = false)
+    @Column(name = "created_at", nullable = false)
     @CreationTimestamp
-    private Instant addedAt;
+    private Instant createdAt;
 
     @Column(nullable = false)
     private String location;
@@ -27,4 +27,6 @@ public class Game {
     @JoinColumn(name = "winner_id", nullable = false)
     @ManyToOne
     private User winner;
+
+    private String notes;
 }

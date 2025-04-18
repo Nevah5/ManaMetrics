@@ -9,18 +9,23 @@ public class Participant {
     @GeneratedValue
     private Long id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private Long position;
 
-    @JoinColumn(name = "deck_id", nullable=false)
+    @Column(name = "guest_name", length = 63)
+    private String guestName;
+
+    private String comment;
+
+    @JoinColumn(name = "deck_id", nullable = false)
     @ManyToOne
     private Deck deck;
 
-    @JoinColumn(name = "game_id", nullable=false)
+    @JoinColumn(name = "game_id", nullable = false)
     @ManyToOne
     private Game game;
 
-    @JoinColumn(name = "user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne
     private User user;
 }

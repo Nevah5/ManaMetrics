@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: mm-backend
   datasource:
     url: jdbc:h2:mem:local;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
     driverClassName: org.h2.Driver
@@ -15,8 +13,3 @@ spring:
   sql:
     init:
       mode: always
-server:
-  port: 3000
-  servlet:
-    context-path: /api
-

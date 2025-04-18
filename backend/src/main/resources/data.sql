@@ -23,3 +23,13 @@ INSERT INTO participants (user_id, game_id, deck_id, position) VALUES
 (2, 2, 2, 4),
 (3, 2, 3, 3),
 (4, 2, 4, 2);
+
+INSERT INTO roles (role) VALUES
+('Admin'),
+('Standard');
+
+INSERT INTO user_roles (user_id, role_id) VALUES
+(1, 1),
+(2, 2),
+(3, 2),
+(4, 2);

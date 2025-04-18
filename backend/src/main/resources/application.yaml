@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: mm-backend
+  profiles:
+    active: release
+server:
+  port: 3000
+  servlet:
+    context-path: /api
+
