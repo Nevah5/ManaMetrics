@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "games")
@@ -12,18 +13,20 @@ public class Game {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "played_at",nullable = false)
+    @Column(name = "played_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Instant playedAt;
+    private LocalDateTime playedAt;
 
-    @Column(name = "added_at",nullable = false)
+    @Column(name = "created_at", nullable = false)
     @CreationTimestamp
-    private Instant addedAt;
+    private Instant createdAt;
 
     @Column(nullable = false)
     private String location;
 
-    @JoinColumn(name = "winner_id",nullable = false)
+    @JoinColumn(name = "winner_id", nullable = false)
     @ManyToOne
     private User winner;
+
+    private String notes;
 }
