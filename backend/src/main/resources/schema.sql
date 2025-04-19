@@ -1,11 +1,3 @@
-DROP TABLE IF EXISTS group_members;
-DROP TABLE IF EXISTS game_participants;
-DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS games;
-DROP TABLE IF EXISTS decks;
-DROP TABLE IF EXISTS groups;
-DROP TABLE IF EXISTS users;
-
 CREATE TABLE IF NOT EXISTS users (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   display_name VARCHAR(32) NOT NULL,
@@ -71,6 +63,7 @@ CREATE TABLE IF NOT EXISTS games (
 );
 
 CREATE TABLE IF NOT EXISTS game_participants (
+  id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   user_id INT,
   deck_id INT,
   game_id INT NOT NULL,
@@ -79,6 +72,5 @@ CREATE TABLE IF NOT EXISTS game_participants (
   comment VARCHAR(255),
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (game_id) REFERENCES games(id),
-  FOREIGN KEY (deck_id) REFERENCES decks(id),
-  PRIMARY KEY (game_id, user_id, guest_name)
+  FOREIGN KEY (deck_id) REFERENCES decks(id)
 );
