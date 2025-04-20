@@ -21,7 +21,9 @@ public class WebSecurityConfiguration {
     };
 
     private static final String[] WHITE_LIST_URL = {
-            "/**"
+            "/ping",
+            "/auth/register",
+            "/auth/login"
     };
 
     @Bean
