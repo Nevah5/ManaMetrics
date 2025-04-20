@@ -30,7 +30,7 @@ public class Deck {
     @Column(nullable = false)
     private String link;
 
-    @Column(name = "added_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
-    private Instant addedAt;
+    private Instant createdAt;
 }

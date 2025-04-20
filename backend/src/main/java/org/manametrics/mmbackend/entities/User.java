@@ -12,18 +12,16 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "users")
+@Getter
 public class User {
     @Id
     @GeneratedValue
-    @Getter
     private Long id;
 
     @Column(length = 32, nullable = false, name = "display_name")
-    @Getter
     private String displayName;
 
     @Column(length = 24, nullable = false, unique = true)
-    @Getter
     private String username;
 
     @Column(nullable = false, unique = true)
@@ -32,8 +30,7 @@ public class User {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     @CreationTimestamp
-    @Getter
     private Instant createdAt;
 }
