@@ -7,24 +7,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
 /**
  * Game participant
  */
 @Entity
-@Table(name = "participants")
-public class Participant {
+@Table(name = "game_participants")
+@Getter
+public class GameParticipant {
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
-    private Long position;
-
-    @Column(name = "guest_name", length = 63)
-    private String guestName;
-
-    private String comment;
+    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne
+    private User user;
 
     @JoinColumn(name = "deck_id", nullable = false)
     @ManyToOne
@@ -34,7 +32,11 @@ public class Participant {
     @ManyToOne
     private Game game;
 
-    @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne
-    private User user;
+    @Column(nullable = false)
+    private Long position;
+
+    @Column(name = "guest_name", length = 63)
+    private String guestName;
+
+    private String comment;
 }
