@@ -18,6 +18,6 @@ public class GroupResource {
 
     @GetMapping
     private ResponseEntity<List<Group>> getAllGroups() {
-        return ResponseEntity.ok(groupService.getAllGroups());
+        return ResponseEntity.ok(groupService.findGroups());
     }
 }
