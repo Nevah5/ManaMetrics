@@ -52,13 +52,13 @@ CREATE TABLE IF NOT EXISTS decks (
 
 CREATE TABLE IF NOT EXISTS games (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  group_owner INT NOT NULL,
+  group_id INT NOT NULL,
   created_by INT NOT NULL,
   location VARCHAR(255) NOT NULL,
   notes TEXT,
   played_at DATETIME NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (group_owner) REFERENCES groups(id),
+  FOREIGN KEY (group_id) REFERENCES groups(id),
   FOREIGN KEY (created_by) REFERENCES users(id)
 );
 

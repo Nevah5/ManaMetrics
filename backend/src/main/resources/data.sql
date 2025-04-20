@@ -24,7 +24,7 @@ INSERT INTO group_members (group_id, user_id, create_games) VALUES
 (3, 3, TRUE),
 (3, 1, FALSE);
 
-INSERT INTO games (group_owner, created_by, location, notes, played_at) VALUES
+INSERT INTO games (group_id, created_by, location, notes, played_at) VALUES
 (1, 1, 's05', 'Competitive match', '2025-04-16 17:30:00'),
 (1, 1, 's05 but darker', 'Another competitive match', '2025-04-16 18:00:00'),
 (2, 2, 'Table 2', 'Casual game with snacks', '2025-04-19 18:00:00'),
