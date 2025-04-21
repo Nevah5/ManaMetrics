@@ -1,9 +1,8 @@
 package org.manametrics.mmbackend.resources;
 
 import lombok.RequiredArgsConstructor;
-import org.manametrics.mmbackend.entities.User;
-import org.manametrics.mmbackend.services.UserService;
-import org.springframework.http.HttpStatus;
+import org.manametrics.mmbackend.entities.Game;
+import org.manametrics.mmbackend.services.GameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/games")
 @RequiredArgsConstructor
-public class UserResource {
-    private final UserService userService;
+public class GameResource {
+    private final GameService gameService;
 
-    @GetMapping()
-    public ResponseEntity<List<User>> getAll() {
-        return new ResponseEntity<>(userService.findUsers(), HttpStatus.OK);
+    @GetMapping
+    private ResponseEntity<List<Game>> getAllGroups() {
+        return ResponseEntity.ok(gameService.findAll());
     }
 }
